@@ -1,0 +1,19 @@
+Pål Stakvik@Asus-VivoBook MINGW64 /c/xampp/htdocs/sider/annet/kodetester/nodetutorial/nodejs-crash-course
+$ heroku login
+heroku: Press any key to open up the browser to login or q to exit: 
+Opening browser to https://cli-auth.heroku.com/auth/cli/browser/85ab220f-d337-460a-9d37-895d75f992a4?requestor=SFMyNTY.g2gDbQAAAA8xODguMTEzLjExNy4xODFuBgA7UkiMdwFiAAFRgA.EseGRROlw_2on1VFNYU31rxvdR6lffIa4zjDmijB408
+Logging in... done
+Logged in as paalss94@gmail.com
+
+paalss94@gmail.com, done = grønn
+
+
+
+
+Pål Stakvik@Asus-VivoBook MINGW64 /c/xampp/htdocs/sider/annet/Ranking-app/www/app (master)
+$ heroku addons:add cleardb:ignite
+Creating cleardb:ignite on ⬢ cryptic-earth-08640... free
+Created cleardb-rugged-54627 as CLEARDB_DATABASE_URL
+Use heroku addons:docs cleardb to view documentation
+
+⬢ cryptic-earth-08640 = lyselilla

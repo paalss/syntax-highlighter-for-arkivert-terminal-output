@@ -1,0 +1,43 @@
+html {
+  font-size: 100%;
+  /* 16px;*/
+}
+
+body {
+  line-height: 1.3em;
+  font-family: Consolas, Courier, 'Courier New', monospace;
+  color: #fff;
+  background-color: #000;
+}
+
+textarea {
+  min-width: 460px;
+  min-height: 111px;
+  color: inherit;
+  background-color: inherit;
+}
+
+button {
+  padding: 8px 27px;
+  margin-bottom: 10px;
+}
+
+.green {
+  color: #00BF00;
+}
+
+.purple {
+  color: #BF00BF;
+}
+
+.lightpurple {
+  color: rgb(174, 0, 255);
+}
+
+.blue {
+  color: #00BFBF;
+}
+
+.yellow {
+  color: #BFBF00;
+}
