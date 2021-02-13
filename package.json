@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/paalss/syntax-highlighter-for-git-bash#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "pug": "^3.0.0",
     "uuid": "^8.3.2"
   },
