@@ -1,0 +1,27 @@
+{
+  "name": "syntax-highlighter-bash",
+  "version": "1.0.0",
+  "description": "Often I want to save my Git Bash logs so I can use them as reference later. If I did something in the VSCode's inbuilt terminal (rather than the standalone Git Bash app), none of its text styles (syntax colors) will remain, making it harder to read. Here's a synax highlighter for Git bash specifically. There are other Syntax Higlighters out on the web, but unfortunately they differenciate by too few text types.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paalss/syntax-highlighter-for-git-bash.git"
+  },
+  "author": "Pål Stakvik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paalss/syntax-highlighter-for-git-bash/issues"
+  },
+  "homepage": "https://github.com/paalss/syntax-highlighter-for-git-bash#readme",
+  "dependencies": {
+    "pug": "^3.0.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
