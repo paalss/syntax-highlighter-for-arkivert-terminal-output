@@ -1,13 +1,49 @@
 # Syntax highlighter for Git Bash
 
-Install
+## Installer lokalt
+
+Clone repo og
 ```
 npm install
-
 ```
-Development
+
+## Åpne
+```
+npm run start
+```
+
+## Åpne i nodemon
 ```
 npm run dev
 ```
 
-Often I want to save my Git Bash logs so I can use them as reference later. If I did something in the VSCode's inbuilt terminal (rather than the standalone Git Bash app), none of its text styles (syntax colors) will remain, making it harder to read. Here's a synax highlighter for Git bash specifically. There are other Syntax Higlighters out on the web, but unfortunately they differenciate by too few text types.
+## Eksempeltekst
+```
+<ditt OS brukernavn>@Asus-VivoBook MINGW64 /c/xampp/htdocs/sider/annet/Ranking-app/www/app (master)
+$ heroku addons:add cleardb:ignite
+Creating cleardb:ignite on ⬢ cryptic-earth-08640... free
+Created cleardb-rugged-54627 as CLEARDB_DATABASE_URL
+Use heroku addons:docs cleardb to view documentation
+
+<ditt OS brukernavn>@Asus-VivoBook MINGW64 /c/xampp/htdocs/sider/annet/kodetester/nodetutorial/express-tut
+$ npm run dev
+
+> express-tut@1.0.0 dev C:\xampp\htdocs\sider\annet\kodetester\nodetutorial\express-tut
+> nodemon index
+
+[nodemon] 2.0.7
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node index index.js`
+server started on 5000
+[nodemon] restarting due to changes...
+[nodemon] starting `node index index.js`
+server started on 5000
+[nodemon] restarting due to changes...
+[nodemon] starting `node index index.js`
+server started on 5000
+[nodemon] app crashed - waiting for file changes before starting...
+^C^C
+```
+

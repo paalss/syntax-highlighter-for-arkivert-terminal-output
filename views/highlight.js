@@ -1,16 +1,19 @@
-window.onload = () => output(osName)
-Ogebi('input').addEventListener('input', () => output(osName))
-
 const osName = document.currentScript.getAttribute('osName')
 
-function output(osName) {
-  const text = getText()
-  const processedText = processText(text, osName)
-  Ogebi('output').innerHTML = processedText
+window.onload = () => {
+  outputInput('outputField', 'inputField', osName)
+  // outputInput('outputExampleField', 'inputExampleField', osName)
 }
+Ogebi('inputField').addEventListener('input', () => outputInput('outputField', 'inputField', osName))
 
-function getText() {
-  return Ogebi('input').value
+function outputInput(output, input, osName) {
+  if (input=='inputField') {
+    var text = Ogebi(input).value 
+  } else {
+    var text = Ogebi(input).innerHTML
+  }
+  const processedText = processText(text, osName)
+  Ogebi(output).innerHTML = processedText
 }
 
 function processText(text, osName) {
@@ -18,27 +21,42 @@ function processText(text, osName) {
   var j = superArray.length
   var line = ''
   while (--j) {
-    checkLine(j, superArray, line, osName)
+    checkLineAndReplace(j, superArray, line, osName)
   }
-  checkLine(0, superArray, line, osName)
+  checkLineAndReplace(0, superArray, line, osName)
 
   const processedText = superArray.join(" ")
   return processedText
 }
 
-function checkLine(j, superArray, line, osName) {
+function checkLineAndReplace(j, superArray, line, osName) {
   line = superArray[j]
-  const subArray = line.split(" ")
-  var i = subArray.length
-  var word = ''
-  while (--i) {
-    checkAndReplace(i, subArray, word, osName)
+  if (line.includes('[nodemon]')) {
+    if (line.includes('restarting due') || line.includes('starting `node')) {
+      superArray[j] = `<br><span class="green">${line}</span>`
+    }
+    else if (line.includes('2.') || line.includes('to restart') || line.includes('watching')) {
+      superArray[j] = `<br><span class="yellow">${line}</span>`
+    }
+    else if (line.includes('app crashed')) {
+      superArray[j] = `<br><span class="red">${line}</span>`
+    }
+    else {
+      superArray[j] = `<br>${line}`
+    }
+  } else {
+    const subArray = line.split(" ")
+    var i = subArray.length
+    var word = ''
+    while (--i) {
+      checkWordAndReplace(i, subArray, word, osName)
+    }
+    checkWordAndReplace(0, subArray, word, osName)
+    superArray[j] = subArray.join(" ")
   }
-  checkAndReplace(0, subArray, word, osName)
-  superArray[j] = subArray.join(" ")
 }
 
-function checkAndReplace(i, subArray, word, osName) {
+function checkWordAndReplace(i, subArray, word, osName) {
   word = subArray[i]
   const prevWord = subArray[i - 1]
   const nextWord = subArray[i + 1]
@@ -67,33 +85,34 @@ function checkAndReplace(i, subArray, word, osName) {
         // f.eks. ordet 'Stakvik@Asus-VivoBook' inneholder 'Stakvik@'
         subArray[i] = `<span class="green">${word}</span>`
       }
-    } else {
+    } else if (osNameArray.length > 3) {
       console.error('OS navn består av flere enn 3 ord. Har ikke lagd kode for slike tilfeller')
     }
   }
   if (word == 'free' || word == 'CLEARDB_DATABASE_URL') {
     subArray[i] = `<span class="green">${word}</span>`
   }
-  if (word == 'MINGW64') {
+  if (word == 'MINGW64' || word == 'MSYS') {
     subArray[i] = `<span class="purple">${word}</span>`
   }
   if (word.substring(0, 2) == '/c' || word == 'cleardb-rugged-54627') {
     subArray[i] = `<span class="yellow">${word}</span>`
   }
-  if (word == '(master)' || word == 'heroku' && prevWord == 'Use' || word == 'addons:docs' && prevWord == 'heroku' || word == 'cleardb' && prevWord == 'addons:docs') {
+  if (word.includes('(') && word.includes(')') && prevWord.substring(0, 2) == '/c' || word == 'heroku' && prevWord == 'Use' || word == 'addons:docs' && prevWord == 'heroku' || word == 'cleardb' && prevWord == 'addons:docs') {
     subArray[i] = `<span class="blue">${word}</span>`
   }
   if (word == '⬢' || prevWord == '⬢') {
     subArray[i] = `<span class="lightpurple">${word}</span>`
   }
   if (i == 0) {
-    subArray[i] = '<br>' + subArray[i]
+    word = subArray[i]
+    subArray[i] = `<br>${word}`
   }
 }
 
 Ogebi('trashButton').addEventListener('click', () => {
-  Ogebi('input').value = ''
-  output(osName)
+  Ogebi('inputField').value = ''
+  outputInput('outputField', 'inputField', osName)
 })
 
 function Ogebi(i) {
