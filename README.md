@@ -1,5 +1,7 @@
 # Syntax highlighter for Git Bash
 
+![App_interface](images/app.png)
+
 ## Installer lokalt
 
 Clone repo og
