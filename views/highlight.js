@@ -1,9 +1,11 @@
-window.onload = () => output()
-Ogebi('input').addEventListener('input', () => output())
+window.onload = () => output(osName)
+Ogebi('input').addEventListener('input', () => output(osName))
 
-function output() {
+const osName = document.currentScript.getAttribute('osName')
+
+function output(osName) {
   const text = getText()
-  const processedText = processText(text)
+  const processedText = processText(text, osName)
   Ogebi('output').innerHTML = processedText
 }
 
@@ -11,35 +13,65 @@ function getText() {
   return Ogebi('input').value
 }
 
-function processText(text) {
+function processText(text, osName) {
   const superArray = text.split('\n')
   var j = superArray.length
   var line = ''
   while (--j) {
-    checkLine(j, superArray, line)
+    checkLine(j, superArray, line, osName)
   }
-  checkLine(0, superArray, line)
+  checkLine(0, superArray, line, osName)
 
   const processedText = superArray.join(" ")
   return processedText
 }
 
-function checkLine(j, superArray, line) {
+function checkLine(j, superArray, line, osName) {
   line = superArray[j]
   const subArray = line.split(" ")
   var i = subArray.length
   var word = ''
   while (--i) {
-    checkAndReplace(i, subArray, word)
+    checkAndReplace(i, subArray, word, osName)
   }
-  checkAndReplace(0, subArray, word)
+  checkAndReplace(0, subArray, word, osName)
   superArray[j] = subArray.join(" ")
 }
 
-function checkAndReplace(i, subArray, word) {
+function checkAndReplace(i, subArray, word, osName) {
   word = subArray[i]
   const prevWord = subArray[i - 1]
-  if (word == 'Pål' || word == 'Stakvik@Asus-VivoBook' || word == 'free' || word == 'CLEARDB_DATABASE_URL') {
+  const nextWord = subArray[i + 1]
+
+  const osNameArray = osName.split(" ")
+  if (osNameArray.length == 1) {
+    if (word.includes(osName + '@')) {
+      // f.eks. ordet 'Pål@Asus-VivoBook' inneholder 'Pål@'
+      subArray[i] = `<span class="green">${word}</span>`
+    }
+  } else {
+    if (word == osNameArray[0]) {
+      subArray[i] = `<span class="green">${word}</span>`
+    }
+    if (osNameArray.length == 2) {
+      if (word.includes(osNameArray[1] + '@')) {
+        // f.eks. ordet 'Stakvik@Asus-VivoBook' inneholder 'Stakvik@'
+        subArray[i] = `<span class="green">${word}</span>`
+      }
+    } else if (osNameArray.length == 3) {
+      if (word == osNameArray[1]) {
+        // f.eks. ordet 'Syvertsen'
+        subArray[i] = `<span class="green">${word}</span>`
+      }
+      if (word.includes(osNameArray[2] + '@')) {
+        // f.eks. ordet 'Stakvik@Asus-VivoBook' inneholder 'Stakvik@'
+        subArray[i] = `<span class="green">${word}</span>`
+      }
+    } else {
+      console.error('OS navn består av flere enn 3 ord. Har ikke lagd kode for slike tilfeller')
+    }
+  }
+  if (word == 'free' || word == 'CLEARDB_DATABASE_URL') {
     subArray[i] = `<span class="green">${word}</span>`
   }
   if (word == 'MINGW64') {
@@ -61,7 +93,7 @@ function checkAndReplace(i, subArray, word) {
 
 Ogebi('trashButton').addEventListener('click', () => {
   Ogebi('input').value = ''
-  output()
+  output(osName)
 })
 
 function Ogebi(i) {
