@@ -1,23 +1,25 @@
 # Syntax highlighter for Git Bash
-
 ![App_interface](images/app.png)
 
-## Installer lokalt
-
+## Åpne nettside lokalt
+### Installer
 Clone repo og
 ```
 npm install
 ```
 
-## Åpne
+### Serve
 ```
 npm run start
 ```
 
-## Åpne i nodemon
+Med Nodemon (for utvikling):
+
 ```
 npm run dev
 ```
+### Gå til
+[localhost:5000](http://localhost:5000/)
 
 ## Eksempeltekst
 ```
