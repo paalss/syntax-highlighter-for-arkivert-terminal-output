@@ -19,12 +19,6 @@ npm run dev
 
 ## Eksempeltekst
 ```
-<ditt OS brukernavn>@Asus-VivoBook MINGW64 /c/xampp/htdocs/sider/annet/Ranking-app/www/app (master)
-$ heroku addons:add cleardb:ignite
-Creating cleardb:ignite on ⬢ cryptic-earth-08640... free
-Created cleardb-rugged-54627 as CLEARDB_DATABASE_URL
-Use heroku addons:docs cleardb to view documentation
-
 <ditt OS brukernavn>@Asus-VivoBook MINGW64 /c/xampp/htdocs/sider/annet/kodetester/nodetutorial/express-tut
 $ npm run dev
 
