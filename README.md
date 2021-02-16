@@ -1,4 +1,8 @@
 # Syntax highlighter for Git Bash
+En webapp som visualiserer kopiert&limt inn Git Bash-logg i opprinnelig syntax highlighting.
+
+Når jeg gjennomfører en tutorial med bruk av Git Bash, liker jeg å ta vare på loggen slik at jeg kan bruke den som referanse senere. Jeg bruker ofte Visual Studio Code's innebygde terminal, men en ulempe med denne er at teksten mister farge når man kopierer og limer den inn i Word. For å få loggen til å bli mer leselig i ettertid, lagde jeg denne.
+
 ![App_interface](images/app.png)
 
 ## Åpne nettside lokalt
@@ -13,7 +17,7 @@ npm install
 npm run start
 ```
 
-Med Nodemon (for utvikling):
+Serve med Nodemon (for utvikling):
 
 ```
 npm run dev
