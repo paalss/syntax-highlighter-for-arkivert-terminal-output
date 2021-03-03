@@ -18,7 +18,7 @@ app.get('/', (req, res) => res.render('index', {
   osName: os.userInfo().username
 }))
 
-// sttaic path
+// staic path
 app.use(express.static(path.join(__dirname, 'views'))) 
 
 const PORT = process.env.PORT || 5000 // hos kommer til å  bestemme port, den er lagret env variabel. hvis ikke env funnet, vil 5000 bli brukt.
