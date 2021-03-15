@@ -1,36 +1,39 @@
-const osName = document.currentScript.getAttribute('osName')
-
 window.onload = () => {
-  outputInput('outputField', 'inputField', osName)
-  // outputInput('outputExampleField', 'inputExampleField', osName)
+  outputInput('outputField', 'inputField')
+  // outputInput('outputExampleField', 'inputExampleField')
 }
-Ogebi('inputField').addEventListener('input', () => outputInput('outputField', 'inputField', osName))
+Ogebi('inputField').addEventListener('input', () => outputInput('outputField', 'inputField'))
 
-function outputInput(output, input, osName) {
-  if (input=='inputField') {
-    var text = Ogebi(input).value 
+function outputInput(output, input) {
+  if (input == 'inputField') {
+    var text = Ogebi(input).value
   } else {
     var text = Ogebi(input).innerHTML
   }
-  const processedText = processText(text, osName)
+  const processedText = processText(text)
   Ogebi(output).innerHTML = processedText
 }
 
-function processText(text, osName) {
+function processText(text) {
   const superArray = text.split('\n')
   var j = superArray.length
   var line = ''
   while (--j) {
-    checkLineAndReplace(j, superArray, line, osName)
+    checkLineAndReplace(j, superArray, line)
   }
-  checkLineAndReplace(0, superArray, line, osName)
+  checkLineAndReplace(0, superArray, line)
 
   const processedText = superArray.join(" ")
   return processedText
 }
 
-function checkLineAndReplace(j, superArray, line, osName) {
+function checkLineAndReplace(j, superArray, line) {
   line = superArray[j]
+  var nextLine = ''
+  if (superArray[j + 1] != undefined) {
+    nextLine = superArray[j + 1]
+  }
+
   if (line.includes('[nodemon]')) {
     if (line.includes('restarting due') || line.includes('starting `node')) {
       superArray[j] = `<br><span class="green">${line}</span>`
@@ -44,50 +47,34 @@ function checkLineAndReplace(j, superArray, line, osName) {
     else {
       superArray[j] = `<br>${line}`
     }
-  } else {
+  }
+  else {
+    if (line.includes('/c')) {
+      if (nextLine != '') {
+        const nextLineSubArray = nextLine.split(" ")
+        if (nextLineSubArray[0] == '<br>$') {
+          superArray[j] = `<br><span class="green">${line}</span>`
+          var line = superArray[j]
+        }
+      }
+    }
     const subArray = line.split(" ")
     var i = subArray.length
     var word = ''
     while (--i) {
-      checkWordAndReplace(i, subArray, word, osName)
+      checkWordAndReplace(i, subArray, word)
     }
-    checkWordAndReplace(0, subArray, word, osName)
+    checkWordAndReplace(0, subArray, word)
     superArray[j] = subArray.join(" ")
   }
 }
 
-function checkWordAndReplace(i, subArray, word, osName) {
+function checkWordAndReplace(i, subArray, word) {
   word = subArray[i]
   const prevWord = subArray[i - 1]
   const nextWord = subArray[i + 1]
-
-  const osNameArray = osName.split(" ")
-  if (osNameArray.length == 1) {
-    if (word.includes(osName + '@')) {
-      // f.eks. ordet 'Pål@Asus-VivoBook' inneholder 'Pål@'
-      subArray[i] = `<span class="green">${word}</span>`
-    }
-  } else {
-    if (word == osNameArray[0]) {
-      subArray[i] = `<span class="green">${word}</span>`
-    }
-    if (osNameArray.length == 2) {
-      if (word.includes(osNameArray[1] + '@')) {
-        // f.eks. ordet 'Stakvik@Asus-VivoBook' inneholder 'Stakvik@'
-        subArray[i] = `<span class="green">${word}</span>`
-      }
-    } else if (osNameArray.length == 3) {
-      if (word == osNameArray[1]) {
-        // f.eks. ordet 'Syvertsen'
-        subArray[i] = `<span class="green">${word}</span>`
-      }
-      if (word.includes(osNameArray[2] + '@')) {
-        // f.eks. ordet 'Stakvik@Asus-VivoBook' inneholder 'Stakvik@'
-        subArray[i] = `<span class="green">${word}</span>`
-      }
-    } else if (osNameArray.length > 3) {
-      console.error('OS navn består av flere enn 3 ord. Har ikke lagd kode for slike tilfeller')
-    }
+  if (word.includes('@')) {
+    subArray[i] = `<span class="green">${word}</span>`
   }
   if (word == 'free' || word == 'CLEARDB_DATABASE_URL') {
     subArray[i] = `<span class="green">${word}</span>`
@@ -112,7 +99,7 @@ function checkWordAndReplace(i, subArray, word, osName) {
 
 Ogebi('trashButton').addEventListener('click', () => {
   Ogebi('inputField').value = ''
-  outputInput('outputField', 'inputField', osName)
+  outputInput('outputField', 'inputField')
 })
 
 function Ogebi(i) {

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syntax highlighter for arkivert Git Bash logg</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <div class="container mt-4">
+    <h1>Syntax highlighter for arkivert Git Bash logg</h1>
+    <button id="trashButton"><i class="fa fa-trash"></i> Tøm textarea</button>
+    <br>
+    <textarea name="inputText" id="inputField"></textarea>
+    <div id="outputField"></div>
+    <!--
+    __________________________________________________ <br>
+    Eksempel input/output:
+    <div id="inputExampleField">
+      {{osName}}@PC MINGW64 /c/ (master)
+    </div>
+    <div id="outputExampleField"></div>
+    -->
+  </div>
+</body>
+<script src="highlight.js"></script>
+
+</html>

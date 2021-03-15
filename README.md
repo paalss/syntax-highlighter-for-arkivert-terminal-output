@@ -5,26 +5,6 @@ En webapp som visualiserer arkivert Git Bash-logg i opprinnelig syntax highlight
 
 Når jeg gjennomfører en tutorial med bruk av Git Bash, liker jeg å ta vare på loggen slik at jeg kan bruke den som referanse senere. Jeg bruker ofte Visual Studio Code's innebygde terminal, men en ulempe med denne er at teksten mister farge når man kopierer og limer den inn i Word. For å få loggen til å bli mer leselig i ettertid, lagde jeg denne.
 
-## Åpne nettside lokalt
-### Installer
-Clone repo og
-```
-npm install
-```
-
-### Serve
-```
-npm run start
-```
-
-Serve med Nodemon (for utvikling):
-
-```
-npm run dev
-```
-### Gå til
-[localhost:5000](http://localhost:5000/)
-
 ## Eksempeltekst
 ```
 <ditt OS brukernavn>@Asus-VivoBook MINGW64 /c/xampp/htdocs/sider/annet/kodetester/nodetutorial/express-tut
