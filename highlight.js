@@ -53,7 +53,8 @@ function checkLineAndReplace(j, superArray, line) {
       if (nextLine != '') {
         const nextLineSubArray = nextLine.split(" ")
         if (nextLineSubArray[0] == '<br>$') {
-          superArray[j] = `<br><span class="green">${line}</span>`
+          // må ha et mellomrom mellom class="green"> og ${line} for at class="green" ikke skal bli en del av krøllafla ordet
+          superArray[j] = `<br><span class="green"> ${line}</span>`
           var line = superArray[j]
         }
       }
