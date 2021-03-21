@@ -1,7 +1,7 @@
 # Syntax highlighter for Git Bash
 ![App_interface](images/app.png)
 
-En webapp som viser arkivert Git Bash-logg i opprinnelige farger. Hvis man bruker Visual Studio Code's innebygde terminal og vil ta vare på loggen til ettertid, vil man ikke kunne kopiere teksten til word og beholde fargene / syntax highligting-en. I stedet vil alt bli svart-på-hvitt, totalt uleselig.
+En webapp som viser arkivert Git Bash-logg i opprinnelige farger. Hvis man bruker Visual Studio Code's innebygde terminal og vil ta vare på loggen til ettertid, vil man ikke kunne beholde fargene / syntax highligting-en på teksten. Hvis man limer inn teksten i Word vil alt bli svart-på-hvitt, totalt uleselig.
 
 Denne appen skal få tilbake (noe av*) leseligheten. *: Dvs. så langt gjenkjenner den første linje i git bash (den med directory-path, shabang og det), nodemon og heroku syntax.
 
