@@ -3,9 +3,9 @@
 
 En webapp som viser arkivert Git Bash-logg i opprinnelige farger.
 
-Hvis man bruker Visual Studio Code's innebygde terminal og vil ta vare på loggen til ettertid, vil man ikke kunne beholde fargene / syntax highligting-en på teksten. Limer man teksten inn i Word vil alt bli svart-på-hvitt, totalt uleselig.
+Hvis man bruker Visual Studio Code's innebygde terminal og vil ta vare på loggen til ettertid, vil man ikke kunne beholde fargene / syntax highligting-en på teksten. Kopierer & limer man teksten inn i Word vil alt bli svart-på-hvitt, totalt uleselig.
 
-Denne appen skal få tilbake (noe av*) leseligheten. *: Dvs. så langt gjenkjenner den første linje i git bash (den med directory-path, shabang og det), nodemon og heroku syntax.
+Denne appen skal få tilbake (noe av*) leseligheten. *: Dvs. så langt gjenkjenner den første linje i git bash (den med directory-path og det), nodemon og heroku syntax.
 
 ## Eksempeltekst
 ```

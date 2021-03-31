@@ -1,17 +1,16 @@
 window.onload = () => {
   outputInput('outputField', 'inputField')
-  // outputInput('outputExampleField', 'inputExampleField')
 }
-Ogebi('inputField').addEventListener('input', () => outputInput('outputField', 'inputField'))
+O('inputField').addEventListener('input', () => outputInput('outputField', 'inputField'))
 
 function outputInput(output, input) {
   if (input == 'inputField') {
-    var text = Ogebi(input).value
+    var text = O(input).value
   } else {
-    var text = Ogebi(input).innerHTML
+    var text = O(input).innerHTML
   }
   const processedText = processText(text)
-  Ogebi(output).innerHTML = processedText
+  O(output).innerHTML = processedText
 }
 
 function processText(text) {
@@ -98,41 +97,14 @@ function checkWordAndReplace(i, subArray, word) {
   }
 }
 
-Ogebi('trashButton').addEventListener('click', () => {
-  Ogebi('inputField').value = ''
+O('trashButton').addEventListener('click', () => {
+  O('inputField').value = ''
   outputInput('outputField', 'inputField')
 })
 
-function Ogebi(i) {
+function O(i) {
   return document.getElementById(i)
-  // return typeof i == 'object' ? i : document.getElementById(i)
 }
-
-// function Oqs(i) {
-//   return i.substring(0, 1) == '#' ? document.getElementById(i) : document.querySelector(i)
-// }
-
-// const string = '#hei'
-// const substring = string.substring(0, 1)
-
-
 
 // brukte denne til denne løsningen
 // https://codereview.stackexchange.com/questions/6347/better-find-and-highlight-implementation-in-html-element
-
-// kanskje se på
-// https://github.com/shikijs/shiki
-// funnet etter å ha
-// googlet 'github syntax highlighter'
-
-
-
-// Forsøk på å splitte string til array både etter space og newlines.
-// function processText(text) {
-//   const array = text.split(' ')
-//      const array = text.split(/" "|\\n/) // https://ibnuhx.com/regex-generator/?ref=madewithvuejs.com
-//      const array = text.split([" "])
-//      const array = text.split([" "]+["\n"])
-//   var i = array.length
-//   var word = ''
-// ...
