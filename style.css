@@ -22,6 +22,10 @@ button {
   margin-bottom: 10px;
 }
 
+.white {
+  color: #fff;
+}
+
 .green {
   color: #00BF00;
 }
@@ -31,7 +35,7 @@ button {
 }
 
 .lightpurple {
-  color: rgb(174, 0, 255);
+  color: #ae00ff;
 }
 
 .blue {
@@ -44,4 +48,21 @@ button {
 
 .red {
   color: #BF0000;
+}
+
+.gray {
+  color: #3a3a3a;
+}
+
+.bg-green {
+  background-color: #00dda6;
+}
+
+.bg-red {
+  background-color: #c73232;
+}
+
+.padding-sides {
+  padding-left: 8px;
+  padding-right: 8px;
 }

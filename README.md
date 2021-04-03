@@ -31,4 +31,22 @@ server started on 5000
 ^C
 ```
 
+```
+PASS  ./script.test.js (24.17 s)
+√ if h2 and buttons exists (1566 ms)
+√ if a list item exists (1929 ms)
+√ if first item can move down (2504 ms)
+√ if first item can be edited (3859 ms)
+√ if user can create item (2357 ms)
+√ if list can be saved (6388 ms)
+
+FAIL  ./script.test.js (15.187 s)
+× if h2 and buttons exists (3003 ms)
+× if a list item exists (251 ms)
+× if first item can move down (622 ms)
+× if first item can be edited (126 ms)
+× if user can create item (495 ms)
+× if list can be saved (3993 ms)
+```
+
 ![App_results](images/app-results.png)

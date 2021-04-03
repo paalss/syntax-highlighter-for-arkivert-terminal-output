@@ -34,6 +34,7 @@ function checkLineAndReplace(j, superArray, line) {
   }
 
   if (line.includes('[nodemon]')) {
+    // linjer som inneholder [nodemon] skal fargelegges med én farge
     if (line.includes('restarting due') || line.includes('starting `node')) {
       superArray[j] = `<br><span class="green">${line}</span>`
     }
@@ -52,12 +53,21 @@ function checkLineAndReplace(j, superArray, line) {
       if (nextLine != '') {
         const nextLineSubArray = nextLine.split(" ")
         if (nextLineSubArray[0] == '<br>$') {
-          // må ha et mellomrom mellom class="green"> og ${line} for at class="green" ikke skal bli en del av krøllafla ordet
-          superArray[j] = `<br><span class="green"> ${line}</span>`
+          // Dette er startlinjen, fargelegg hele grønn (etterpå fargelegges MINGW64/MSYS og path og branch oppå der igjen)
+          superArray[j] = `<br><span class="green"> ${line}</span>` // MÅ ha et mellomrom mellom class="green"> og ${line} for at class="green" ikke skal bli en del av krøllafla ordet
           var line = superArray[j]
+          // var wordsToColor = {'MINGW64': 'purple'} // kanskje la dette erstatte noe av det i checkWordAndReplace
         }
       }
     }
+    if (line.includes('test.js') && line.includes('(') && line.includes(')')) {
+      forThisLineColorTheseWords({ 'PASS': 'gray bg-green padding-sides', 'FAIL': 'gray bg-red padding-sides' }, line, superArray, j)
+    }
+    else if ((line.includes('√') || line.includes('×')) && line.includes('ms')) {
+      forThisLineColorTheseWords({ '√': 'green', '×': 'red' }, line, superArray, j)
+    }
+
+    line = superArray[j]
     const subArray = line.split(" ")
     var i = subArray.length
     var word = ''
@@ -69,11 +79,25 @@ function checkLineAndReplace(j, superArray, line) {
   }
 }
 
+function forThisLineColorTheseWords(wordsAndColors, line, superArray, j) {
+  const entries = Object.entries(wordsAndColors)
+  var lineSubArray = line.split(" ")
+  for (let x = 0; x < lineSubArray.length; x++) {
+    for (let i = 0; i < entries.length; i++) {
+      if (lineSubArray[x] == entries[i][0]) {
+        lineSubArray[x] = `<span class='${entries[i][1]}'>${lineSubArray[x]}</span>`
+      }
+    }
+    var coloredLine = lineSubArray.join(' ')
+    superArray.splice(j, 1, coloredLine)
+  }
+}
+
 function checkWordAndReplace(i, subArray, word) {
   word = subArray[i]
   const prevWord = subArray[i - 1]
   const nextWord = subArray[i + 1]
-  if (word.includes('@')) {
+  if (word.includes('@') && nextWord == 'MINGW64' || nextWord == 'MSYS') {
     subArray[i] = `<span class="green">${word}</span>`
   }
   if (word == 'free' || word == 'CLEARDB_DATABASE_URL') {
