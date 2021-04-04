@@ -1,14 +1,20 @@
 window.onload = () => {
-  outputInput('outputField', 'inputField')
+  outputInput('inputField', 'outputField')
 }
-O('inputField').addEventListener('input', () => outputInput('outputField', 'inputField'))
 
-function outputInput(output, input) {
-  if (input == 'inputField') {
-    var text = O(input).value
-  } else {
-    var text = O(input).innerHTML
-  }
+function O(i) {
+  return document.getElementById(i)
+}
+
+O('inputField').addEventListener('input', () => outputInput('inputField', 'outputField'))
+
+/**
+ * Ta input, prosesser det og lim inn i output
+ * @param {*} input 
+ * @param {*} output 
+ */
+function outputInput(input, output) {
+  var text = O(input).value
   const processedText = processText(text)
   O(output).innerHTML = processedText
 }
@@ -49,6 +55,7 @@ function checkLineAndReplace(j, superArray, line) {
     }
   }
   else {
+    var wordsAndColors = ''
     if (line.includes('/c')) {
       if (nextLine != '') {
         const nextLineSubArray = nextLine.split(" ")
@@ -56,25 +63,38 @@ function checkLineAndReplace(j, superArray, line) {
           // Dette er startlinjen, fargelegg hele grønn (etterpå fargelegges MINGW64/MSYS og path og branch oppå der igjen)
           superArray[j] = `<br><span class="green"> ${line}</span>` // MÅ ha et mellomrom mellom class="green"> og ${line} for at class="green" ikke skal bli en del av krøllafla ordet
           var line = superArray[j]
-          // var wordsToColor = {'MINGW64': 'purple'} // kanskje la dette erstatte noe av det i checkWordAndReplace
+          wordsAndColors = {
+            'MINGW64': 'purple',
+            'MSYS': 'purple',
+            '/c': 'yellow',
+            '(': 'blue'
+          }
+          // var wordsToColor = {'MINGW64': 'purple'} // kanskje la dette erstatte noe av det i forAnyLinecolorTheseWords
         }
       }
     }
     if (line.includes('test.js') && line.includes('(') && line.includes(')')) {
-      forThisLineColorTheseWords({ 'PASS': 'gray bg-green padding-sides', 'FAIL': 'gray bg-red padding-sides' }, line, superArray, j)
+      wordsAndColors = {
+        'PASS': 'gray bg-green padding-sides',
+        'FAIL': 'gray bg-red padding-sides'
+      }
     }
     else if ((line.includes('√') || line.includes('×')) && line.includes('ms')) {
-      forThisLineColorTheseWords({ '√': 'green', '×': 'red' }, line, superArray, j)
+      wordsAndColors = {
+        '√': 'green',
+        '×': 'red'
+      }
     }
+    forThisLineColorTheseWords(wordsAndColors, line, superArray, j)
 
     line = superArray[j]
     const subArray = line.split(" ")
     var i = subArray.length
     var word = ''
     while (--i) {
-      checkWordAndReplace(i, subArray, word)
+      forAnyLinecolorTheseWords(i, subArray, word)
     }
-    checkWordAndReplace(0, subArray, word)
+    forAnyLinecolorTheseWords(0, subArray, word)
     superArray[j] = subArray.join(" ")
   }
 }
@@ -84,7 +104,7 @@ function forThisLineColorTheseWords(wordsAndColors, line, superArray, j) {
   var lineSubArray = line.split(" ")
   for (let x = 0; x < lineSubArray.length; x++) {
     for (let i = 0; i < entries.length; i++) {
-      if (lineSubArray[x] == entries[i][0]) {
+      if (lineSubArray[x].includes(entries[i][0])) {
         lineSubArray[x] = `<span class='${entries[i][1]}'>${lineSubArray[x]}</span>`
       }
     }
@@ -93,20 +113,14 @@ function forThisLineColorTheseWords(wordsAndColors, line, superArray, j) {
   }
 }
 
-function checkWordAndReplace(i, subArray, word) {
+function forAnyLinecolorTheseWords(i, subArray, word) {
   word = subArray[i]
   const prevWord = subArray[i - 1]
   const nextWord = subArray[i + 1]
-  if (word.includes('@') && nextWord == 'MINGW64' || nextWord == 'MSYS') {
-    subArray[i] = `<span class="green">${word}</span>`
-  }
   if (word == 'free' || word == 'CLEARDB_DATABASE_URL') {
     subArray[i] = `<span class="green">${word}</span>`
   }
-  if (word == 'MINGW64' || word == 'MSYS') {
-    subArray[i] = `<span class="purple">${word}</span>`
-  }
-  if (word.substring(0, 2) == '/c' || word == 'cleardb-rugged-54627') {
+  if (word.includes('cleardb-rugged')) {
     subArray[i] = `<span class="yellow">${word}</span>`
   }
   if (word.includes('(') && word.includes(')') && prevWord.substring(0, 2) == '/c' || word == 'heroku' && prevWord == 'Use' || word == 'addons:docs' && prevWord == 'heroku' || word == 'cleardb' && prevWord == 'addons:docs') {
@@ -123,12 +137,8 @@ function checkWordAndReplace(i, subArray, word) {
 
 O('trashButton').addEventListener('click', () => {
   O('inputField').value = ''
-  outputInput('outputField', 'inputField')
+  outputInput('inputField', 'outputField')
 })
-
-function O(i) {
-  return document.getElementById(i)
-}
 
 // brukte denne til denne løsningen
 // https://codereview.stackexchange.com/questions/6347/better-find-and-highlight-implementation-in-html-element
