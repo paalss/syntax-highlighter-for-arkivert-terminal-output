@@ -9,7 +9,7 @@ Denne appen skal få tilbake (noe av*) leseligheten. *: Dvs. så langt gjenkjenn
 
 ## Eksempeltekst
 ```
-OS-navn@PC-type MINGW64 /c/xampp/htdocs/sider/annet/kodetester/nodetutorial/express-tut
+OS-navn@PC-type MINGW64 /c/xampp/htdocs/sider/annet/kodetester/nodetutorial/express-tut (master)
 $ npm run dev
 
 > express-tut@1.0.0 dev C:\xampp\htdocs\sider\annet\kodetester\nodetutorial\express-tut
@@ -29,9 +29,10 @@ server started on 5000
 server started on 5000
 [nodemon] app crashed - waiting for file changes before starting...
 ^C
-```
 
-```
+OS-navn@PC-type MINGW64 /c/xampp/htdocs/sider/annet/Ranking-app/www/app (master)
+$ npm test
+
 PASS  ./script.test.js (24.17 s)
 √ if h2 and buttons exists (1566 ms)
 √ if a list item exists (1929 ms)

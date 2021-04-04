@@ -123,7 +123,7 @@ function forAnyLinecolorTheseWords(i, subArray, word) {
   if (word.includes('cleardb-rugged')) {
     subArray[i] = `<span class="yellow">${word}</span>`
   }
-  if (word.includes('(') && word.includes(')') && prevWord.substring(0, 2) == '/c' || word == 'heroku' && prevWord == 'Use' || word == 'addons:docs' && prevWord == 'heroku' || word == 'cleardb' && prevWord == 'addons:docs') {
+  if (word == 'heroku' && prevWord == 'Use' || word == 'addons:docs' && prevWord == 'heroku' || word == 'cleardb' && prevWord == 'addons:docs') {
     subArray[i] = `<span class="blue">${word}</span>`
   }
   if (word == '⬢' || prevWord == '⬢') {
