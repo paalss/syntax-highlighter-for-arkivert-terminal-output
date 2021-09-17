@@ -1,13 +1,13 @@
-# Syntax highlighter for Git Bash
+# Syntax highlighter for Terminal languages
 ![App_interface](images/app.png)
 
-En webapp som viser arkivert Git Bash-logg i opprinnelige farger.
+En webapp som viser arkivert terminal (bl.a. git bash)-logg i opprinnelige farger.
 
 Hvis man bruker Visual Studio Code's innebygde terminal og vil ta vare på loggen til ettertid, vil man ikke kunne beholde fargene / syntax highligting-en på teksten. Kopierer & limer man teksten inn i Word vil alt bli svart-på-hvitt, totalt uleselig.
 
 Denne appen skal få tilbake (noe av*) leseligheten. *: Dvs. så langt gjenkjenner den første linje i git bash (den med directory-path og det), nodemon og heroku syntax.
 
-## Eksempeltekst
+## Eksempel input
 ```
 OS-navn@PC-type MINGW64 /c/xampp/htdocs/sider/annet/kodetester/nodetutorial/express-tut (master)
 $ npm run dev
@@ -50,4 +50,5 @@ FAIL  ./script.test.js (15.187 s)
 × if list can be saved (3993 ms)
 ```
 
+## Eksempel output
 ![App_results](images/app-results.png)
